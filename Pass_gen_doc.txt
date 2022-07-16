@@ -1,0 +1,16 @@
+1. Password may contains:
+	a. lower case letters of english alphabet
+	b. upper case letters of english alphabet
+	c. numbers from 0 to 9
+	d. symbols from !?@.,/\&*
+
+2. Password lengths:
+	user input lengths from 5 to 12 signs
+
+3. Password difficulty:
+	a. easy: contains at least one sign of 1.a and 1.c
+	b. medium: contains at least one sign of 1.a 1.b and 1.c
+	c. hard: contains at least one sign of 1.a 1.b 1.c and 1.d
+
+4. Number of passwords:
+	user could get from 1 up to 100 passwords
