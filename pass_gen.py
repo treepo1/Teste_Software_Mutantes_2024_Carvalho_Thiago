@@ -16,11 +16,8 @@ class PassGen:
         self.difficult = difficult  # Choose the difficulty of password: easy, medium or hard
         self.amount = amount  # Choose amount of passwords
 
-    def verify_input(self):
-        assert self.lengths in range(5, 13), 'Length should be between 5 and 12'
-        assert self.difficult in ['easy', 'medium', 'hard'], 'Difficult should be easy, medium or hard'
-        assert self.amount in range(1, 101), 'Minimum amount is 1, maximum is 100'
 
+class PassCreate(PassGen):
     def easy_pass(self):
         pass_base_easy = list(choice(self.lower_case) + choice(self.numbers))
         final_list_easy = pass_base_easy + choices(self.easy_whole_list, k=self.lengths - 2)
@@ -40,17 +37,19 @@ class PassGen:
         shuffle(final_list_hard)
         return ''.join(final_list_hard)
 
+
+class EmailCreate(PassGen):
+    def email(self):
+        return ''.join(choices(self.lower_case, k=choice(range(5, 8)))) + '@fakemail.com'
+
+
+class GetPass(PassCreate, EmailCreate):
     def get_pass(self):
-        self.verify_input()
         if self.difficult == 'easy':
-            return [self.easy_pass() for x in range(self.amount)]
+            return {self.email(): self.easy_pass() for x in range(self.amount)}
         elif self.difficult == 'medium':
-            return [self.medium_pass() for x in range(self.amount)]
+            return {self.email(): self.medium_pass() for x in range(self.amount)}
         else:
-            return [self.hard_pass() for x in range(self.amount)]
+            return {self.email(): self.hard_pass() for x in range(self.amount)}
 
 
-user_pass = PassGen(int(input('Enter the lengths of password between 5 and 12: ')),
-                    input('Choose the difficulty of password: easy, medium or hard: '),
-                    int(input('How many passwords do you require ')))
-print(user_pass.get_pass())
