@@ -3,53 +3,81 @@ import string
 
 
 class PassGen:
-    lower_case = list(string.ascii_lowercase)
-    upper_case = list(string.ascii_uppercase)
-    numbers = list('0123456789')
-    symbols = list('!?@.,/\&*')
-    easy_whole_list = lower_case + numbers
-    medium_whole_list = easy_whole_list + upper_case
-    hard_whole_list = medium_whole_list + symbols
+    LOWER_CASE = list(string.ascii_lowercase)
+    UPPER_CASE = list(string.ascii_uppercase)
+    NUMBERS = list('0123456789')
+    SYMBOLS = list('!?@&*')
+    EASY_WHOLE_LIST = LOWER_CASE + NUMBERS
+    MEDIUM_WHOLE_LIST = EASY_WHOLE_LIST + UPPER_CASE
+    HARD_WHOLE_LIST = MEDIUM_WHOLE_LIST + SYMBOLS
 
-    def __init__(self, lengths=5, difficult='easy', amount=1):
-        self.lengths = lengths  # Enter the lengths of password between 5 and 12
-        self.difficult = difficult  # Choose the difficulty of password: easy, medium or hard
-        self.amount = amount  # Choose amount of passwords
+    def __init__(self, length, difficult):
+        if length in range(5, 13):
+            self.length = length
+        else:
+            raise ValueError('Length should be between 5 and 12')
+        if difficult in ('easy', 'medium', 'hard'):
+            self.difficult = difficult
+        else:
+            raise ValueError('Difficult should be easy, medium or hard')
 
-
-class PassCreate(PassGen):
-    def easy_pass(self):
-        pass_base_easy = list(choice(self.lower_case) + choice(self.numbers))
-        final_list_easy = pass_base_easy + choices(self.easy_whole_list, k=self.lengths - 2)
+    def __easy_pass(self):
+        pass_base_easy = list(choice(self.LOWER_CASE) + choice(self.NUMBERS))
+        final_list_easy = pass_base_easy + choices(self.EASY_WHOLE_LIST, k=self.length - 2)
         shuffle(final_list_easy)
         return ''.join(final_list_easy)
 
-    def medium_pass(self):
-        pass_base_medium = list(choice(self.lower_case) + choice(self.numbers) + choice(self.upper_case))
-        final_list_medium = pass_base_medium + choices(self.medium_whole_list, k=self.lengths - 3)
+    def __medium_pass(self):
+        pass_base_medium = list(choice(self.LOWER_CASE) + choice(self.NUMBERS) + choice(self.UPPER_CASE))
+        final_list_medium = pass_base_medium + choices(self.MEDIUM_WHOLE_LIST, k=self.length - 3)
         shuffle(final_list_medium)
         return ''.join(final_list_medium)
 
-    def hard_pass(self):
-        pass_base_hard = list(choice(self.lower_case) + choice(self.numbers) +
-                              choice(self.upper_case) + choice(self.symbols))
-        final_list_hard = pass_base_hard + choices(self.hard_whole_list, k=self.lengths - 4)
+    def __hard_pass(self):
+        pass_base_hard = list(choice(self.LOWER_CASE) + choice(self.NUMBERS) +
+                              choice(self.UPPER_CASE) + choice(self.SYMBOLS))
+        final_list_hard = pass_base_hard + choices(self.HARD_WHOLE_LIST, k=self.length - 4)
         shuffle(final_list_hard)
         return ''.join(final_list_hard)
 
-
-class EmailCreate(PassGen):
-    def email(self):
-        return ''.join(choices(self.lower_case, k=choice(range(5, 8)))) + '@fakemail.com'
-
-
-class GetPass(PassCreate, EmailCreate):
-    def get_pass(self):
+    def __create_pass(self):
         if self.difficult == 'easy':
-            return {self.email(): self.easy_pass() for x in range(self.amount)}
+            return self.__easy_pass()
         elif self.difficult == 'medium':
-            return {self.email(): self.medium_pass() for x in range(self.amount)}
+            return self.__medium_pass()
+        elif self.difficult == 'hard':
+            return self.__hard_pass()
         else:
-            return {self.email(): self.hard_pass() for x in range(self.amount)}
+            raise ValueError
+
+    def get_pass(self):
+        if len(self.__create_pass()) in range(5, 13):
+            return self.__create_pass()
+        else:
+            raise ValueError
 
 
+class PassList(PassGen):
+    def __init__(self, length, difficult, amount):
+        super().__init__(length, difficult)
+        if amount in range(1, 101):
+            self.amount = amount
+        else:
+            raise ValueError('Amount should be between 1 and 100')
+
+    def __create_pass_list(self):
+        return [self.get_pass() for self.p in range(self.amount)]
+
+    def get_pass_list(self):
+        if len(self.__create_pass_list()) in range(1, 101):
+            return self.__create_pass_list()
+        else:
+            raise ValueError
+
+
+class EmailPassDict(PassList):
+    def email(self):
+        return ''.join(choices(self.LOWER_CASE, k=choice(range(5, 8)))) + '@fakemail.com'
+
+    def get_email_pass_dict(self):
+        return {self.email(): password for password in self.get_pass_list()}
