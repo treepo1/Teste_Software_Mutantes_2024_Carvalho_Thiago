@@ -22,6 +22,9 @@ class PassGen:
             raise ValueError('Difficult should be easy, medium or hard')
 
     def __easy_pass(self):
+        """"Create base with one random lower case letter and one random number from 0 to 9,
+        add to this base (user input length - 2(two elements are already used in base)) amount of random elements
+        from mixed list of lower case letters and  numbers, shuffle it and return a string"""
         pass_base_easy = list(choice(self.LOWER_CASE) + choice(self.NUMBERS))
         final_list_easy = pass_base_easy + choices(self.EASY_WHOLE_LIST, k=self.length - 2)
         shuffle(final_list_easy)
@@ -41,6 +44,7 @@ class PassGen:
         return ''.join(final_list_hard)
 
     def __create_pass(self):
+        """return password string of user choice: easy, medium or hard"""
         if self.difficult == 'easy':
             return self.__easy_pass()
         elif self.difficult == 'medium':
@@ -51,6 +55,8 @@ class PassGen:
             raise ValueError
 
     def get_pass(self):
+        """return a string with password, in case of length reassignment with
+         invalid value(not between 5 and 13) raise ValueError"""
         if len(self.__create_pass()) in range(5, 13):
             return self.__create_pass()
         else:
