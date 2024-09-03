@@ -1,0 +1,133 @@
+<html><body><h1>/Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py</h1>Killed 60 out of 72 mutants<h2>Survived</h2>Survived mutation testing. These mutants show holes in your test suite.<h3>Mutant 1</h3><pre>--- /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
++++ /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
+@@ -3,7 +3,7 @@
+ 
+ 
+ class PassGen:
+-    LOWER_CASE = list(string.ascii_lowercase)
++    LOWER_CASE = None
+     UPPER_CASE = list(string.ascii_uppercase)
+     NUMBERS = list('0123456789')
+     SYMBOLS = list('!?@&*')
+</pre><h3>Mutant 2</h3><pre>--- /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
++++ /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
+@@ -4,7 +4,7 @@
+ 
+ class PassGen:
+     LOWER_CASE = list(string.ascii_lowercase)
+-    UPPER_CASE = list(string.ascii_uppercase)
++    UPPER_CASE = None
+     NUMBERS = list('0123456789')
+     SYMBOLS = list('!?@&*')
+     EASY_WHOLE_LIST = LOWER_CASE + NUMBERS
+</pre><h3>Mutant 3</h3><pre>--- /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
++++ /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
+@@ -5,7 +5,7 @@
+ class PassGen:
+     LOWER_CASE = list(string.ascii_lowercase)
+     UPPER_CASE = list(string.ascii_uppercase)
+-    NUMBERS = list('0123456789')
++    NUMBERS = list('XX0123456789XX')
+     SYMBOLS = list('!?@&*')
+     EASY_WHOLE_LIST = LOWER_CASE + NUMBERS
+     MEDIUM_WHOLE_LIST = EASY_WHOLE_LIST + UPPER_CASE
+</pre><h3>Mutant 4</h3><pre>--- /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
++++ /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
+@@ -5,7 +5,7 @@
+ class PassGen:
+     LOWER_CASE = list(string.ascii_lowercase)
+     UPPER_CASE = list(string.ascii_uppercase)
+-    NUMBERS = list('0123456789')
++    NUMBERS = None
+     SYMBOLS = list('!?@&*')
+     EASY_WHOLE_LIST = LOWER_CASE + NUMBERS
+     MEDIUM_WHOLE_LIST = EASY_WHOLE_LIST + UPPER_CASE
+</pre><h3>Mutant 5</h3><pre>--- /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
++++ /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
+@@ -6,7 +6,7 @@
+     LOWER_CASE = list(string.ascii_lowercase)
+     UPPER_CASE = list(string.ascii_uppercase)
+     NUMBERS = list('0123456789')
+-    SYMBOLS = list('!?@&*')
++    SYMBOLS = list('XX!?@&*XX')
+     EASY_WHOLE_LIST = LOWER_CASE + NUMBERS
+     MEDIUM_WHOLE_LIST = EASY_WHOLE_LIST + UPPER_CASE
+     HARD_WHOLE_LIST = MEDIUM_WHOLE_LIST + SYMBOLS
+</pre><h3>Mutant 6</h3><pre>--- /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
++++ /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
+@@ -6,7 +6,7 @@
+     LOWER_CASE = list(string.ascii_lowercase)
+     UPPER_CASE = list(string.ascii_uppercase)
+     NUMBERS = list('0123456789')
+-    SYMBOLS = list('!?@&*')
++    SYMBOLS = None
+     EASY_WHOLE_LIST = LOWER_CASE + NUMBERS
+     MEDIUM_WHOLE_LIST = EASY_WHOLE_LIST + UPPER_CASE
+     HARD_WHOLE_LIST = MEDIUM_WHOLE_LIST + SYMBOLS
+</pre><h3>Mutant 7</h3><pre>--- /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
++++ /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
+@@ -7,7 +7,7 @@
+     UPPER_CASE = list(string.ascii_uppercase)
+     NUMBERS = list('0123456789')
+     SYMBOLS = list('!?@&*')
+-    EASY_WHOLE_LIST = LOWER_CASE + NUMBERS
++    EASY_WHOLE_LIST = LOWER_CASE - NUMBERS
+     MEDIUM_WHOLE_LIST = EASY_WHOLE_LIST + UPPER_CASE
+     HARD_WHOLE_LIST = MEDIUM_WHOLE_LIST + SYMBOLS
+ 
+</pre><h3>Mutant 8</h3><pre>--- /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
++++ /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
+@@ -7,7 +7,7 @@
+     UPPER_CASE = list(string.ascii_uppercase)
+     NUMBERS = list('0123456789')
+     SYMBOLS = list('!?@&*')
+-    EASY_WHOLE_LIST = LOWER_CASE + NUMBERS
++    EASY_WHOLE_LIST = None
+     MEDIUM_WHOLE_LIST = EASY_WHOLE_LIST + UPPER_CASE
+     HARD_WHOLE_LIST = MEDIUM_WHOLE_LIST + SYMBOLS
+ 
+</pre><h3>Mutant 9</h3><pre>--- /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
++++ /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
+@@ -8,7 +8,7 @@
+     NUMBERS = list('0123456789')
+     SYMBOLS = list('!?@&*')
+     EASY_WHOLE_LIST = LOWER_CASE + NUMBERS
+-    MEDIUM_WHOLE_LIST = EASY_WHOLE_LIST + UPPER_CASE
++    MEDIUM_WHOLE_LIST = EASY_WHOLE_LIST - UPPER_CASE
+     HARD_WHOLE_LIST = MEDIUM_WHOLE_LIST + SYMBOLS
+ 
+     def __init__(self, length, difficult):
+</pre><h3>Mutant 10</h3><pre>--- /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
++++ /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
+@@ -8,7 +8,7 @@
+     NUMBERS = list('0123456789')
+     SYMBOLS = list('!?@&*')
+     EASY_WHOLE_LIST = LOWER_CASE + NUMBERS
+-    MEDIUM_WHOLE_LIST = EASY_WHOLE_LIST + UPPER_CASE
++    MEDIUM_WHOLE_LIST = None
+     HARD_WHOLE_LIST = MEDIUM_WHOLE_LIST + SYMBOLS
+ 
+     def __init__(self, length, difficult):
+</pre><h3>Mutant 11</h3><pre>--- /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
++++ /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
+@@ -9,7 +9,7 @@
+     SYMBOLS = list('!?@&*')
+     EASY_WHOLE_LIST = LOWER_CASE + NUMBERS
+     MEDIUM_WHOLE_LIST = EASY_WHOLE_LIST + UPPER_CASE
+-    HARD_WHOLE_LIST = MEDIUM_WHOLE_LIST + SYMBOLS
++    HARD_WHOLE_LIST = MEDIUM_WHOLE_LIST - SYMBOLS
+ 
+     def __init__(self, length, difficult):
+         if length in range(5, 13):
+</pre><h3>Mutant 69</h3><pre>--- /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
++++ /Users/thiagofreire/code/password_generator_with_unit_tests/pass_gen.py
+@@ -83,7 +83,7 @@
+ 
+ class EmailPassDict(PassList):
+     def email(self):
+-        return ''.join(choices(self.LOWER_CASE, k=choice(range(5, 8)))) + '@fakemail.com'
++        return ''.join(choices(self.LOWER_CASE, k=choice(range(6, 8)))) + '@fakemail.com'
+ 
+     def get_email_pass_dict(self):
+         return {self.email(): password for password in self.get_pass_list()}
+</pre></body></html>

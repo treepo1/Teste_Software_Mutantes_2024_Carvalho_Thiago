@@ -15,7 +15,7 @@ class TestPassGen:
         for el in self.obj.get_pass():
             assert el in pass_gen.PassGen.EASY_WHOLE_LIST
 
-    def test_difficult_medium(self):
+    def test_difficult_medium(self): 
         self.obj.difficult = 'medium'
         for el in self.obj.get_pass():
             assert el in pass_gen.PassGen.MEDIUM_WHOLE_LIST
@@ -34,14 +34,24 @@ class TestPassGenNegative:
         with pytest.raises(ValueError):
             self.obj.get_pass()
 
+    @pytest.mark.parametrize('length_neg', [4, 13])
+    def test_length_init(self, length_neg):
+        with pytest.raises(ValueError,match=r"Length should be between 5 and 12$"):
+            self.obj.__init__(length_neg, "easy")
+
     def test_difficult_wrong(self):
         self.obj.difficult = 'qwerty'
         with pytest.raises(ValueError):
             self.obj.get_pass()
 
+    def test_difficult_wrong_init(self):
+        difficult = 'qwerty'
+        with pytest.raises(ValueError, match=r"Difficult should be easy, medium or hard$"):
+            self.obj.__init__(6,difficult)
+
 
 @pytest.mark.usefixtures('rand_pass_list')
-class TestPassSequence:
+class TestPassSequence: 
     @pytest.mark.parametrize('amount', [1, 50, 100])
     def test_amount_pos(self, amount):
         self.obj.amount = amount
@@ -53,6 +63,10 @@ class TestPassSequence:
         with pytest.raises(ValueError):
             self.obj.get_pass_list()
 
+    @pytest.mark.parametrize('amount', [0, 101])
+    def test_amount_neg_init(self, amount):
+        with pytest.raises(ValueError,match=r"Amount should be between 1 and 100$"):
+            self.obj.__init__(6, "easy", amount)
 
 @pytest.mark.usefixtures('rand_email_pass_dict')
 class TestPassEmailDict:
